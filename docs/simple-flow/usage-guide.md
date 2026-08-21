@@ -28,3 +28,5 @@ Use Issue-Draft to create a DOCUMENTATION draft. Start-Implement updates only
 approved documentation files and does not require TDD. PR-Finalize is still the
 only merge entry point after human review.
 
+
+Phase 4 smoke marker: remote artifact path verified.
