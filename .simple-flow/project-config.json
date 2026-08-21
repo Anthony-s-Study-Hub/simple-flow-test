@@ -1,0 +1,12 @@
+{
+  "project_name": "phase4-test-project",
+  "test_command": "python -m pytest",
+  "scope": [
+    "src/",
+    "tests/"
+  ],
+  "documentation": [
+    "docs/"
+  ],
+  "roadmap_target_source": "GitHub Projects or .simple-flow/roadmap-targets.txt"
+}
