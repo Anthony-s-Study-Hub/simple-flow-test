@@ -8,5 +8,7 @@
   "documentation": [
     "docs/"
   ],
+  "install_mode": "vendored",
+  "release_source": null,
   "roadmap_target_source": "GitHub Projects or .simple-flow/roadmap-targets.txt"
 }
