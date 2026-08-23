@@ -17,7 +17,7 @@
     ".codex/skills/pr-finalize/scripts/check_pre_merge.py": "983e436c9d9ebde9ac0cdb06464834cbb764622905a636c91a07d1baa955251d",
     ".codex/skills/review-triage/SKILL.md": "7e59fd005b5d67d2c49783a2148ce05c7176f261983a47a313139801aaf09814",
     ".codex/skills/review-triage/scripts/classify_finding.py": "261316f76836671dccfe98313d34096a1972dec1aa272444430f6f3732f0f0f0",
-    ".codex/skills/start-implement/SKILL.md": "84046d25ab28bbe935896baffdcba3e004970d89b6a6253b82d34cca3cbff176",
+    ".codex/skills/start-implement/SKILL.md": "8c6112bfdc05674b986ec3492612a9b89490a685d682bbbc2c99b7010826fb3d",
     ".codex/skills/start-implement/scripts/select_path.py": "9181c3e52eb1e6e8db93c657ecfacebfbb4381d5cfc8c7277b48583012af33e7",
     ".codex/skills/start-implement/scripts/start_documentation.py": "a28a46bf24fb43af94df63752efa9c7e4f3076b5d689336973a40c458ae7fec4",
     ".github/ISSUE_TEMPLATE/documentation.md": "a58ba50a53d526faf0f46fb9aac05e41c50017980d39b38215641838c54980c2",
