@@ -36,3 +36,5 @@ Decision Proposals, Documentation Findings, New Component Proposals, and one
 DOCUMENTATION Canonical Draft, then stops. The draft must be reviewed by a
 human before the existing DOCUMENTATION flow begins with Start-Implement.
 
+
+Phase 4 smoke marker: remote artifact path verified.
