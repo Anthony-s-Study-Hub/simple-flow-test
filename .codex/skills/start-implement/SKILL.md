@@ -34,6 +34,12 @@ The invocation means the named draft passed human review.
 
 ## Execution
 
+### Windows shell compatibility
+
+On Windows, the developer shell is PowerShell. Use the exact `python`
+commands below. Do not substitute Bash-only syntax such as `grep`, `head`,
+heredocs, or `ls -a` when inspecting the repository or invoking a helper.
+
 1. Confirm the human invocation includes the exact Draft ID.
 2. Run this skill's bundled path-selection script before publishing or updating
    Issues, branches, pull requests, or implementation files:
