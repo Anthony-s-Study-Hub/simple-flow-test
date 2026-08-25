@@ -1,5 +1,5 @@
 {
-  "project_name": "phase4-manual-test-project",
+  "project_name": "new-project",
   "test_command": "python -m pytest",
   "scope": [
     "src/"
@@ -7,7 +7,7 @@
   "documentation": [
     "docs/"
   ],
-  "install_mode": "vendored",
-  "release_source": null,
+  "install_mode": "thin",
+  "release_source": "git+https://github.com/Anthony-s-Study-Hub/simple-flow.git@v0.2.0",
   "roadmap_target_source": "GitHub Projects or .simple-flow/roadmap-targets.txt"
 }

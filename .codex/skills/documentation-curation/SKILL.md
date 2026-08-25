@@ -27,12 +27,6 @@ documentation update proposals.
 
 ## Execution
 
-### Windows shell compatibility
-
-On Windows, the developer shell is PowerShell. Use the exact `python`
-command below. Do not substitute Bash-only syntax such as `grep`, `head`,
-heredocs, or `ls -a` when locating the history package or invoking the helper.
-
 1. Collect or receive the normalized history package. The agent must not search
    GitHub history manually when deterministic collection output is available.
 2. Read that normalized package and perform only the semantic analysis:

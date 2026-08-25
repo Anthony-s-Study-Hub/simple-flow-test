@@ -35,13 +35,6 @@ implementation has been reviewed and accepted.
 
 ## Execution
 
-### Windows shell compatibility
-
-On Windows, the developer shell is PowerShell. Use the exact `python`
-command below. Do not substitute Bash-only syntax such as `grep`, `head`,
-heredocs, or `ls -a`; GitHub CLI exposes the draft field as `isDraft`, not
-`draft`.
-
 1. Confirm the human explicitly invoked `PR-Finalize <PR>`.
 2. Collect objective PR state from GitHub and CI into a JSON file with these
    fields: `exists`, `open`, `draft`, `required_checks`,

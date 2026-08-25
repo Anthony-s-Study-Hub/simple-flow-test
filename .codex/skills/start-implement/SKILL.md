@@ -34,12 +34,6 @@ The invocation means the named draft passed human review.
 
 ## Execution
 
-### Windows shell compatibility
-
-On Windows, the developer shell is PowerShell. Use the exact `python`
-commands below. Do not substitute Bash-only syntax such as `grep`, `head`,
-heredocs, or `ls -a` when inspecting the repository or invoking a helper.
-
 1. Confirm the human invocation includes the exact Draft ID.
 2. Run this skill's bundled path-selection script before publishing or updating
    Issues, branches, pull requests, or implementation files:
@@ -57,13 +51,8 @@ python .codex/skills/start-implement/scripts/select_path.py --draft-id <Draft ID
    instead of manually recreating the GitHub Issue, branch, commit, push, and
    draft PR steps:
 
-   In a cloned developer repository, derive `--repo` from
-   `git remote get-url origin`. Use `gh` from `PATH` unless the environment
-   exposes a different executable. Do not ask the developer for either value
-   when they are discoverable locally.
-
 ```powershell
-python .codex/skills/start-implement/scripts/start_documentation.py --draft-id <Draft ID> --drafts-dir .simple-flow/drafts --repo <origin URL> --gh-path gh
+python .codex/skills/start-implement/scripts/start_documentation.py --draft-id <Draft ID> --drafts-dir .simple-flow/drafts --repo <owner/repo-or-url> --gh-path <gh executable>
 ```
 
 6. Stop when the returned `stop_point` is `HUMAN_PR_REVIEW`.

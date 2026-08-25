@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install "simple-flow[test] @ git+https://github.com/Anthony-s-Study-Hub/simple-flow.git@v0.2.0"
       - name: Validate PR contract
         run: python -m simple_flow_gates.cli validate-pr-contract --event-path "$GITHUB_EVENT_PATH"
 
@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install "simple-flow[test] @ git+https://github.com/Anthony-s-Study-Hub/simple-flow.git@v0.2.0"
       - name: Load linked issue body
         env:
           GH_TOKEN: ${{ github.token }}
@@ -61,7 +61,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install "simple-flow[test] @ git+https://github.com/Anthony-s-Study-Hub/simple-flow.git@v0.2.0"
       - name: Fetch base branch
         run: git fetch origin ${{ github.base_ref }} --depth=100
       - name: Load linked issue body
@@ -97,7 +97,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install "simple-flow[test] @ git+https://github.com/Anthony-s-Study-Hub/simple-flow.git@v0.2.0"
       - name: Fetch base branch
         run: git fetch origin ${{ github.base_ref }} --depth=100
       - name: Load linked issue body
@@ -133,7 +133,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install "simple-flow[test] @ git+https://github.com/Anthony-s-Study-Hub/simple-flow.git@v0.2.0"
       - name: Fetch base branch
         run: git fetch origin ${{ github.base_ref }} --depth=100
       - name: Load linked issue body
@@ -176,7 +176,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install "simple-flow[test] @ git+https://github.com/Anthony-s-Study-Hub/simple-flow.git@v0.2.0"
       - name: Fetch base branch
         run: git fetch origin ${{ github.base_ref }} --depth=100
       - name: Load linked issue body
@@ -219,7 +219,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install "simple-flow[test] @ git+https://github.com/Anthony-s-Study-Hub/simple-flow.git@v0.2.0"
       - name: Fetch base branch
         run: git fetch origin ${{ github.base_ref }} --depth=100
       - name: Load linked issue body
