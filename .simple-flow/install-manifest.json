@@ -4,7 +4,7 @@
     "name": "simple-flow",
     "version": "0.2.0"
   },
-  "project_name": "phase4-test-project",
+  "project_name": "phase4-manual-test-project",
   "install_mode": "vendored",
   "release_source": null,
   "files": {
@@ -27,10 +27,10 @@
     ".github/workflows/orphan-branch-watch.yml": "b9abbb25d4ec5a9744a490507c3e928f34ddad50a0f4e054f59429299f591a79",
     ".github/workflows/phase1-tests.yml": "8cd39bacec3a90461925e884157fe607400a4d9dd5a288f38eebce3746fec315",
     ".github/workflows/pr-governance.yml": "1e4c249cbd26dcdd4aef405f9a8417ae32852dbf13bc24a47b67e9f5f1a55437",
-    ".simple-flow/README.md": "9fcf72ce716378d80efa44acc9f2b075540e3b936de100ab1043d71410befae9",
+    ".simple-flow/README.md": "00f571197f397f01573e167fbe16d839d78f0d36ccd44770b05bf73fa6ae106c",
     ".simple-flow/baselines/component-baseline-template.md": "2aeb9c5ffaa946038bfb668b6e5b85557ced24d51e7c0561d967396d6a7f4ddf",
     ".simple-flow/baselines/high-level-project-baseline.md": "ca15401363321a0cb42a3085316d417a4cb3330858535c2fa9c139f75f87df11",
-    ".simple-flow/project-config.json": "cbd44f427410715a99aa3a09d5ac2c80867137420a3ef0e71b529ae6d538745d",
+    ".simple-flow/project-config.json": "7a2dd1b6e712802767421a44c6296a2302ca09150d2622121ff12565289dc234",
     ".simple-flow/roadmap-targets.txt": "317954685c4a48c665f5a1a75bf239e8eac536c3269750a488c893015657e214",
     "AGENTS.md": "f7ab075ba66d6834f7d5dc6dadc45f7c3d19ff81d54981e666193c951b908c02",
     "docs/simple-flow/github-setup-guide.md": "31bb9dcc46d7c757b3646803e25d76752f03c5d3733e3e761a0cf431ca7c9e3c",

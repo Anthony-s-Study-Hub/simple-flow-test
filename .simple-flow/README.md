@@ -1,4 +1,4 @@
-# phase4-test-project Simple Flow Setup
+# phase4-manual-test-project Simple Flow Setup
 
 This directory contains the installed Simple Flow controlled development workflow.
 Install mode: `vendored`.
