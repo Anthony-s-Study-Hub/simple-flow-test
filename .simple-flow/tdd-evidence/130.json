@@ -1,15 +1,15 @@
 {
   "issue": 130,
   "red": {
-    "commit": "8f20faf",
+    "commit": "8f20faf3072babc50ed7ff12d5fa8dd4e0c1b8d0",
     "command": "python -m pytest tests/test_joke_teller.py -q",
     "exit_code": 2
   },
   "implementation": {
-    "commit": "6415fe2"
+    "commit": "6415fe276e67ac96a4d5c54c4044ad69f0347015"
   },
   "green": {
-    "commit": "64d3014",
+    "commit": "64d30141dfc94010856e68a7c0cddef296a7215a",
     "command": "python -m pytest tests/test_joke_teller.py -q",
     "exit_code": 0
   }
