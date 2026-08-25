@@ -1,0 +1,16 @@
+{
+  "issue": 130,
+  "red": {
+    "commit": "8f20faf",
+    "command": "python -m pytest tests/test_joke_teller.py -q",
+    "exit_code": 2
+  },
+  "implementation": {
+    "commit": "6415fe2"
+  },
+  "green": {
+    "commit": "64d3014",
+    "command": "python -m pytest tests/test_joke_teller.py -q",
+    "exit_code": 0
+  }
+}
