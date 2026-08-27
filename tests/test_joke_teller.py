@@ -108,3 +108,19 @@ def test_interactive_mode_does_not_repeat_jokes_in_one_session(tmp_path: Path) -
     assert "Session summary: rated 6 joke(s)." in result.stdout
     ratings = json.loads(ratings_file.read_text(encoding="utf-8"))
     assert len(ratings) == 6
+
+
+def test_malformed_ratings_file_is_ignored(tmp_path: Path) -> None:
+    ratings_file = tmp_path / "ratings.json"
+    ratings_file.write_text("not valid json", encoding="utf-8")
+
+    result = run_joke_teller(
+        "--interactive",
+        "--ratings-file",
+        str(ratings_file),
+        input_text="3\nq\n",
+    )
+
+    assert result.returncode == 0
+    ratings = json.loads(ratings_file.read_text(encoding="utf-8"))
+    assert sum(len(values) for values in ratings.values()) == 1
