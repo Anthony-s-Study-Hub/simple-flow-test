@@ -22,10 +22,16 @@ JOKES: dict[str, tuple[str, ...]] = {
 
 
 def build_parser() -> argparse.ArgumentParser:
-    return argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(
         prog="joke",
         description="Tell one random offline joke.",
     )
+    parser.add_argument(
+        "--category",
+        choices=tuple(JOKES),
+        help="Limit the joke to a category.",
+    )
+    return parser
 
 
 def choose_joke(category: str | None = None) -> str:
@@ -37,13 +43,7 @@ def choose_joke(category: str | None = None) -> str:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    parser = build_parser()
-    parser.add_argument(
-        "--category",
-        choices=tuple(JOKES),
-        help="Limit the joke to a category.",
-    )
-    args = parser.parse_args(argv)
+    args = build_parser().parse_args(argv)
     print(choose_joke(args.category))
     return 0
 

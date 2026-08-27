@@ -1,22 +1,31 @@
-# Simple Flow Phase 4 Test Project
+# Simple Flow Joke Teller
 
-This repository is reset by the Phase 4 harness before each scenario.
+An offline command-line joke teller with a small bundled joke collection.
 
-## Joke teller
-
-Install the project in editable mode, then run the offline CLI:
+Install it in editable mode:
 
 ```powershell
 python -m pip install -e .
-joke
-joke --category programming
 ```
 
-The command selects one joke from the bundled local collection. It supports
-the `general`, `programming`, and `dad` categories and does not make network
-requests or require an API key. The module form is also available after
-installation:
+Tell a random joke:
 
 ```powershell
-python -m simple_flow_test_app.joke_teller --category dad
+joke
+```
+
+Limit the result to a category:
+
+```powershell
+joke --category general
+joke --category programming
+joke --category dad
+```
+
+The command is fully offline and does not require an API key or network access.
+
+Run the tests with:
+
+```powershell
+python -m pytest
 ```

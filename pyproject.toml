@@ -3,12 +3,13 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "phase4-test-project"
-version = "0.0.1"
+name = "simple-flow-joke-teller"
+version = "0.1.0"
+description = "A small offline command-line joke teller."
 requires-python = ">=3.11"
 
 [project.scripts]
 joke = "simple_flow_test_app.joke_teller:main"
 
 [tool.pytest.ini_options]
-pythonpath = [".", "src"]
+pythonpath = ["src"]

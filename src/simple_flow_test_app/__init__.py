@@ -1,1 +1,1 @@
-"""Small app used by the Simple Flow Phase 4 experiment."""
+"""Small offline command-line applications for the Simple Flow test project."""
