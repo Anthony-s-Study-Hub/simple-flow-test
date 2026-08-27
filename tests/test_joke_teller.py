@@ -75,7 +75,7 @@ def test_interactive_mode_persists_ratings_and_quit_skips_current_joke(tmp_path:
     assert "Session summary: rated 1 joke(s)." in result.stdout
     ratings = json.loads(ratings_file.read_text(encoding="utf-8"))
     assert sum(len(values) for values in ratings.values()) == 1
-    assert 5 in [value for values in ratings.values() for value in values]
+    assert {"score": 5} in [value for values in ratings.values() for value in values]
 
 
 def test_interactive_mode_retries_invalid_ratings(tmp_path: Path) -> None:
@@ -101,7 +101,7 @@ def test_interactive_mode_does_not_repeat_jokes_in_one_session(tmp_path: Path) -
         "--interactive",
         "--ratings-file",
         str(ratings_file),
-        input_text="1\n2\n3\n4\n5\n1\n",
+        input_text="1\n\n2\n\n3\n\n4\n\n5\n\n1\n\n",
     )
 
     assert result.returncode == 0
@@ -124,3 +124,61 @@ def test_malformed_ratings_file_is_ignored(tmp_path: Path) -> None:
     assert result.returncode == 0
     ratings = json.loads(ratings_file.read_text(encoding="utf-8"))
     assert sum(len(values) for values in ratings.values()) == 1
+
+
+def test_interactive_mode_accepts_and_persists_an_optional_review(tmp_path: Path) -> None:
+    ratings_file = tmp_path / "ratings.json"
+
+    result = run_joke_teller(
+        "--interactive",
+        "--ratings-file",
+        str(ratings_file),
+        input_text="5\nAbsolutely hilarious!\nq\n",
+    )
+
+    assert result.returncode == 0
+    assert "Optional review" in result.stdout
+    ratings = json.loads(ratings_file.read_text(encoding="utf-8"))
+    entries = [entry for values in ratings.values() for entry in values]
+    assert {"score": 5, "review": "Absolutely hilarious!"} in entries
+
+
+def test_interactive_mode_allows_skipping_an_optional_review(tmp_path: Path) -> None:
+    ratings_file = tmp_path / "ratings.json"
+
+    result = run_joke_teller(
+        "--interactive",
+        "--ratings-file",
+        str(ratings_file),
+        input_text="4\n\nq\n",
+    )
+
+    assert result.returncode == 0
+    assert result.stdout.count("Optional review") == 1
+    ratings = json.loads(ratings_file.read_text(encoding="utf-8"))
+    entries = [entry for values in ratings.values() for entry in values]
+    assert {"score": 4} in entries
+    assert all("review" not in entry for entry in entries)
+
+
+def test_interactive_mode_keeps_reviews_in_the_same_file_for_later_runs(tmp_path: Path) -> None:
+    ratings_file = tmp_path / "ratings.json"
+
+    first_result = run_joke_teller(
+        "--interactive",
+        "--ratings-file",
+        str(ratings_file),
+        input_text="2\nNeeds a stronger punchline.\nq\n",
+    )
+    second_result = run_joke_teller(
+        "--interactive",
+        "--ratings-file",
+        str(ratings_file),
+        input_text="q\n",
+    )
+
+    assert first_result.returncode == 0
+    assert second_result.returncode == 0
+    ratings = json.loads(ratings_file.read_text(encoding="utf-8"))
+    entries = [entry for values in ratings.values() for entry in values]
+    assert {"score": 2, "review": "Needs a stronger punchline."} in entries

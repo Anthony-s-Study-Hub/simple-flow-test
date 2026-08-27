@@ -23,6 +23,7 @@ JOKES: dict[str, tuple[str, ...]] = {
 }
 
 DEFAULT_RATINGS_FILE = Path.home() / ".simple-flow-joke-teller" / "ratings.json"
+RatingEntry = dict[str, int | str]
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -66,7 +67,7 @@ def _jokes_for_session(category: str | None = None) -> list[tuple[str, str]]:
     ]
 
 
-def load_ratings(path: Path) -> dict[str, list[int]]:
+def load_ratings(path: Path) -> dict[str, list[RatingEntry]]:
     if not path.exists():
         return {}
     try:
@@ -76,17 +77,31 @@ def load_ratings(path: Path) -> dict[str, list[int]]:
     if not isinstance(raw, dict):
         return {}
 
-    ratings: dict[str, list[int]] = {}
+    ratings: dict[str, list[RatingEntry]] = {}
     for joke_id, values in raw.items():
         if not isinstance(joke_id, str) or not isinstance(values, list):
             continue
-        valid_values = [value for value in values if isinstance(value, int) and 1 <= value <= 5]
-        if valid_values:
-            ratings[joke_id] = valid_values
+        valid_entries: list[RatingEntry] = []
+        for value in values:
+            if type(value) is int and 1 <= value <= 5:
+                valid_entries.append({"score": value})
+                continue
+            if not isinstance(value, dict):
+                continue
+            score = value.get("score")
+            if type(score) is not int or not 1 <= score <= 5:
+                continue
+            entry: RatingEntry = {"score": score}
+            review = value.get("review")
+            if isinstance(review, str) and review.strip():
+                entry["review"] = review.strip()
+            valid_entries.append(entry)
+        if valid_entries:
+            ratings[joke_id] = valid_entries
     return ratings
 
 
-def save_ratings(path: Path, ratings: dict[str, list[int]]) -> None:
+def save_ratings(path: Path, ratings: dict[str, list[RatingEntry]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(ratings, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
@@ -119,7 +134,23 @@ def run_interactive(category: str | None, ratings_file: Path) -> int:
                 print("Please enter a whole number from 1 to 5, or q to quit.")
                 continue
 
-            ratings.setdefault(joke_id, []).append(score)
+            try:
+                review_response = input("Optional review (press Enter to skip): ")
+            except EOFError:
+                review_response = ""
+
+            entry: RatingEntry = {"score": score}
+            review = review_response.strip()
+            if review.lower() == "q":
+                ratings.setdefault(joke_id, []).append(entry)
+                save_ratings(ratings_file, ratings)
+                rated_count += 1
+                print(f"Session summary: rated {rated_count} joke(s).")
+                return 0
+            if review:
+                entry["review"] = review
+
+            ratings.setdefault(joke_id, []).append(entry)
             save_ratings(ratings_file, ratings)
             rated_count += 1
             break
