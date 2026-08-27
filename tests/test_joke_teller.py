@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 from os import environ
@@ -8,7 +9,10 @@ from pathlib import Path
 from simple_flow_test_app.joke_teller import JOKES
 
 
-def run_joke_teller(*args: str) -> subprocess.CompletedProcess[str]:
+def run_joke_teller(
+    *args: str,
+    input_text: str | None = None,
+) -> subprocess.CompletedProcess[str]:
     project_root = Path(__file__).parents[1]
     child_environment = environ.copy()
     child_environment["PYTHONPATH"] = str(project_root / "src")
@@ -17,6 +21,7 @@ def run_joke_teller(*args: str) -> subprocess.CompletedProcess[str]:
         capture_output=True,
         text=True,
         env=child_environment,
+        input=input_text,
         check=False,
     )
 
@@ -53,3 +58,53 @@ def test_help_lists_supported_categories() -> None:
     assert "general" in result.stdout
     assert "programming" in result.stdout
     assert "dad" in result.stdout
+
+
+def test_interactive_mode_persists_ratings_and_quit_skips_current_joke(tmp_path: Path) -> None:
+    ratings_file = tmp_path / "ratings.json"
+
+    result = run_joke_teller(
+        "--interactive",
+        "--ratings-file",
+        str(ratings_file),
+        input_text="5\nq\n",
+    )
+
+    assert result.returncode == 0
+    assert "Rate this joke from 1 to 5" in result.stdout
+    assert "Session summary: rated 1 joke(s)." in result.stdout
+    ratings = json.loads(ratings_file.read_text(encoding="utf-8"))
+    assert sum(len(values) for values in ratings.values()) == 1
+    assert 5 in [value for values in ratings.values() for value in values]
+
+
+def test_interactive_mode_retries_invalid_ratings(tmp_path: Path) -> None:
+    ratings_file = tmp_path / "ratings.json"
+
+    result = run_joke_teller(
+        "--interactive",
+        "--ratings-file",
+        str(ratings_file),
+        input_text="0\nnot-a-number\n4\nq\n",
+    )
+
+    assert result.returncode == 0
+    assert result.stdout.count("Please enter a whole number from 1 to 5, or q to quit.") == 2
+    ratings = json.loads(ratings_file.read_text(encoding="utf-8"))
+    assert sum(len(values) for values in ratings.values()) == 1
+
+
+def test_interactive_mode_does_not_repeat_jokes_in_one_session(tmp_path: Path) -> None:
+    ratings_file = tmp_path / "ratings.json"
+
+    result = run_joke_teller(
+        "--interactive",
+        "--ratings-file",
+        str(ratings_file),
+        input_text="1\n2\n3\n4\n5\n1\n",
+    )
+
+    assert result.returncode == 0
+    assert "Session summary: rated 6 joke(s)." in result.stdout
+    ratings = json.loads(ratings_file.read_text(encoding="utf-8"))
+    assert len(ratings) == 6

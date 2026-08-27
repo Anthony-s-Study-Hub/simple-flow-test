@@ -22,6 +22,18 @@ joke --category programming
 joke --category dad
 ```
 
+Run an interactive rating session:
+
+```powershell
+joke --interactive
+joke --interactive --category programming
+```
+
+The interactive mode shows each available joke once per session and prompts
+for a rating from 1 to 5. Enter `q` to quit. Ratings are stored locally in
+`~/.simple-flow-joke-teller/ratings.json`; use `--ratings-file` to choose a
+different JSON file.
+
 The command is fully offline and does not require an API key or network access.
 
 Run the tests with:
