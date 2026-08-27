@@ -44,3 +44,12 @@ def test_invalid_category_exits_with_a_helpful_error() -> None:
     assert "general" in result.stderr
     assert "programming" in result.stderr
     assert "dad" in result.stderr
+
+
+def test_help_lists_supported_categories() -> None:
+    result = run_joke_teller("--help")
+
+    assert result.returncode == 0
+    assert "general" in result.stdout
+    assert "programming" in result.stdout
+    assert "dad" in result.stdout
