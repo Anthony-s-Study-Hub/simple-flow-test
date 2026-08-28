@@ -29,6 +29,14 @@ def test_default_invocation_prints_one_local_joke() -> None:
     assert result.stdout.strip() in {joke for jokes in JOKES.values() for joke in jokes}
 
 
+def test_all_option_prints_every_local_joke() -> None:
+    result = run_joke_teller("--all")
+
+    expected = [joke for jokes in JOKES.values() for joke in jokes]
+    assert result.returncode == 0
+    assert result.stdout.splitlines() == expected
+
+
 def test_category_selection_prints_a_joke_from_that_category() -> None:
     for category, jokes in JOKES.items():
         result = run_joke_teller("--category", category)
