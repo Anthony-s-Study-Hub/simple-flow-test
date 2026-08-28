@@ -1,0 +1,16 @@
+{
+  "issue": 137,
+  "red": {
+    "commit": "2557e35",
+    "command": "python -m pytest tests/test_joke_teller.py -q",
+    "exit_code": 1
+  },
+  "implementation": {
+    "commit": "d5d096a"
+  },
+  "green": {
+    "commit": "bd946ebe7a7d1bb08ca5e989cf674ac9f30c20e1",
+    "command": "python -m pytest tests/test_joke_teller.py -q",
+    "exit_code": 0
+  }
+}
