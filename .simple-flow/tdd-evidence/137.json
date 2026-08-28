@@ -1,12 +1,12 @@
 {
   "issue": 137,
   "red": {
-    "commit": "2557e35",
+    "commit": "2557e3532301a9a62791789d8cefd435ead92dd2",
     "command": "python -m pytest tests/test_joke_teller.py -q",
     "exit_code": 1
   },
   "implementation": {
-    "commit": "d5d096a"
+    "commit": "d5d096a103580e237420cd696bb7317a2a43bf28"
   },
   "green": {
     "commit": "bd946ebe7a7d1bb08ca5e989cf674ac9f30c20e1",
