@@ -29,11 +29,13 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def choose_joke(category: str | None = None) -> str:
+    return random.choice(jokes_for(category))
+
+
+def jokes_for(category: str | None = None) -> tuple[str, ...]:
     if category is None:
-        jokes = tuple(joke for category_jokes in JOKES.values() for joke in category_jokes)
-    else:
-        jokes = JOKES[category]
-    return random.choice(jokes)
+        return tuple(joke for category_jokes in JOKES.values() for joke in category_jokes)
+    return JOKES[category]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -43,8 +45,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         choices=tuple(JOKES),
         help="Limit the joke to a category.",
     )
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Print every built-in joke.",
+    )
     args = parser.parse_args(argv)
-    print(choose_joke(args.category))
+    if args.all:
+        print("\n".join(jokes_for()))
+    else:
+        print(choose_joke(args.category))
     return 0
 
 
